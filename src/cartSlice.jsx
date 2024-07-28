@@ -25,9 +25,25 @@ const cartSlice = createSlice({
             }else{
                 existingItem.quantity -=1;
             }
+        },
+        incrementQuantity:(state,action)=>{
+            const id = action.payload;
+            const existingItem = state.items.find(i=>i.id=== id)
+            if(existingItem){
+                existingItem.quantity += 1;
+            }
+            
+        }
+        ,
+        decrementQuantity:(state,action)=>{
+            const id = action.payload;
+            const existingItem = state.items.find(i=>i.id === id )
+            if(existingItem && existingItem.quantity  >0){
+                existingItem.quantity -=1;
+            }
         }
     }
 })
 
-export const {addItem, removeItem} = cartSlice.actions;
+export const {addItem, removeItem, incrementQuantity, decrementQuantity} = cartSlice.actions;
 export default cartSlice.reducer
